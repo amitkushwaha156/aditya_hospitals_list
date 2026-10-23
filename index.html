@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Birla Health Insurance - Network Hospital Finder 2026 (12,800+ Hospitals)</title>
+    <!-- Tailwind CSS v4 Browser Build -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .tag-pill {
+            transition: all 0.2s ease;
+        }
+        .tag-pill:hover {
+            transform: translateY(-1px);
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .hospital-card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white text-xs py-2 px-4 border-b border-blue-800/40 no-print">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium border border-emerald-500/30">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Directory 2026
+                </span>
+                <span class="text-slate-300 hidden sm:inline">Aditya Birla Health Smart Network List</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-300">
+                <span id="headerTotalCount"><i class="fa-solid fa-hospital mr-1 text-blue-400"></i> Loading hospitals...</span>
+                <span class="hidden md:inline text-slate-500">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-location-dot mr-1 text-emerald-400"></i> 1,512+ Cities</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-b from-blue-700 to-blue-800 text-white shadow-xl py-7 px-4 no-print relative overflow-hidden">
+        <!-- Background subtle glow decoration -->
+        <div class="absolute -right-16 -top-16 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 relative z-10">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-600/60 border border-blue-400/30 text-blue-100 text-xs font-semibold uppercase tracking-wider mb-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-300"></i> Cashless Hospital Network Finder
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white flex items-center gap-3">
+                    <i class="fa-solid fa-hospital-user text-blue-200"></i> Aditya Birla Health Hospital Directory
+                </h1>
+                <p class="text-blue-100 text-sm md:text-base mt-1.5 font-light max-w-2xl">
+                    Search and filter from all <strong class="font-semibold text-white">12,800+ empaneled hospitals</strong> across India. Filter instantly by state, city, PIN code, and specialty.
+                </p>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                <button onclick="exportToJSON()" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg border border-white/20 transition flex items-center gap-2 shadow-sm" title="Download current filtered data as JSON">
+                    <i class="fa-solid fa-file-code text-blue-200"></i> Download JSON
+                </button>
+                <button onclick="exportToCSV()" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg border border-white/20 transition flex items-center gap-2 shadow-sm" title="Export current filtered data to CSV/Excel">
+                    <i class="fa-solid fa-file-excel text-emerald-300"></i> Export CSV
+                </button>
+                <button onclick="window.print()" class="px-3.5 py-2 bg-blue-900/60 hover:bg-blue-900 text-white text-xs font-semibold rounded-lg border border-blue-400/30 transition flex items-center gap-2 shadow-sm" title="Print this hospital list">
+                    <i class="fa-solid fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8">
+        
+        <!-- Search & Filter Card -->
+        <div class="glass-card rounded-2xl shadow-lg border border-slate-200/80 p-5 md:p-6 mb-6 no-print">
+            
+            <!-- Row 1: Universal Search & Quick Pincode -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
+                
+                <!-- Main Search Input -->
+                <div class="md:col-span-8">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="universalSearch">
+                        <i class="fa-solid fa-magnifying-glass text-blue-600 mr-1"></i> Hospital Name, Landmark, or Keyword
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                        </span>
+                        <input type="text" id="universalSearch" oninput="debounceFilter()" 
+                            placeholder="e.g. Yashoda, Lifeline, Fortis, Apollo, Civil Lines, Ring Road..." 
+                            class="w-full pl-10 pr-10 py-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm font-medium transition shadow-sm placeholder:text-slate-400">
+                        <button id="clearSearchBtn" onclick="clearInput('universalSearch')" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pincode Search Input -->
+                <div class="md:col-span-4">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="pincodeSearch">
+                        <i class="fa-solid fa-map-pin text-blue-600 mr-1"></i> 6-Digit PIN Code
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-hashtag text-sm"></i>
+                        </span>
+                        <input type="text" id="pincodeSearch" maxlength="6" oninput="debounceFilter()" 
+                            placeholder="e.g. 400001, 110001, 462042..." 
+                            class="w-full pl-10 pr-10 py-3 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm font-medium transition shadow-sm placeholder:text-slate-400">
+                        <button id="clearPinBtn" onclick="clearInput('pincodeSearch')" class="hidden absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Row 2: State, City & Specialty Selectors -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- State Dropdown -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="stateFilter">
+                        <i class="fa-solid fa-map-location-dot text-blue-600 mr-1"></i> Filter by State
+                    </label>
+                    <div class="relative">
+                        <select id="stateFilter" onchange="onStateChange()" 
+                            class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm font-medium transition shadow-sm">
+                            <option value="">All States / UTs (All India)</option>
+                            <!-- Dynamically populated -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- City Search / Datalist Dropdown -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="cityFilter">
+                        <i class="fa-solid fa-city text-blue-600 mr-1"></i> Filter by City
+                    </label>
+                    <div class="relative">
+                        <input list="citiesDatalist" id="cityFilter" oninput="debounceFilter()" 
+                            placeholder="Type or select a city..." 
+                            class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm font-medium transition shadow-sm">
+                        <datalist id="citiesDatalist">
+                            <!-- Dynamically populated -->
+                        </datalist>
+                    </div>
+                </div>
+
+                <!-- Specialty / Problem Filter Dropdown -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5" for="problemFilter">
+                        <i class="fa-solid fa-stethoscope text-blue-600 mr-1"></i> Filter by Problem / Specialty
+                    </label>
+                    <div class="relative">
+                        <select id="problemFilter" onchange="debounceFilter()" 
+                            class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm font-medium transition shadow-sm">
+                            <option value="">All Specialties / Problems</option>
+                            <option value="Eye">👁️ Eye / Netralaya / Ophthalmology</option>
+                            <option value="Ortho">🦴 Ortho / Bone / Joint / Trauma</option>
+                            <option value="Child">👶 Child / Pediatric / Maternity / IVF</option>
+                            <option value="Heart">❤️ Heart / Cardiology</option>
+                            <option value="Kidney">💧 Kidney / Urology / Dialysis</option>
+                            <option value="Cancer">🎗️ Cancer / Oncology</option>
+                            <option value="Multi">🏥 Multispeciality / Super Speciality</option>
+                            <option value="Dental">🦷 Dental Care</option>
+                            <option value="ENT">👂 ENT / Ear Nose Throat</option>
+                            <option value="Neuro">🧠 Neurology / Brain</option>
+                            <option value="Ayurveda">🌿 Ayurveda & Alternative Care</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Row 3: Popular Quick City Filter Chips & Reset -->
+            <div class="mt-4 pt-4 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+                    <span class="font-semibold text-slate-700 mr-1"><i class="fa-solid fa-fire text-amber-500"></i> Top Cities:</span>
+                    <button onclick="setCityFilter('Pune')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Pune</button>
+                    <button onclick="setCityFilter('Hyderabad')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Hyderabad</button>
+                    <button onclick="setCityFilter('Bengaluru')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Bengaluru</button>
+                    <button onclick="setCityFilter('Delhi')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Delhi</button>
+                    <button onclick="setCityFilter('Ahmedabad')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Ahmedabad</button>
+                    <button onclick="setCityFilter('Chennai')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Chennai</button>
+                    <button onclick="setCityFilter('Jaipur')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Jaipur</button>
+                    <button onclick="setCityFilter('Thane')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Thane</button>
+                    <button onclick="setCityFilter('Mumbai')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Mumbai</button>
+                    <button onclick="setCityFilter('Kolkata')" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition font-medium">Kolkata</button>
+                </div>
+                <button onclick="resetAllFilters()" class="text-xs font-semibold text-rose-600 hover:text-rose-700 hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-rotate-left"></i> Reset All Filters
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Result Stats & Control Bar -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5 px-1 no-print">
+            <div>
+                <h2 id="resultCount" class="text-base md:text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <span>Showing all hospitals</span>
+                </h2>
+                <p id="filterSummary" class="text-xs text-slate-500 mt-0.5"></p>
+            </div>
+
+            <!-- Page Size & View Control -->
+            <div class="flex items-center gap-3 self-end sm:self-auto">
+                <div class="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                    <label for="pageSizeSelect">Show:</label>
+                    <select id="pageSizeSelect" onchange="changePageSize()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="24" selected>24 / page</option>
+                        <option value="48">48 / page</option>
+                        <option value="96">96 / page</option>
+                        <option value="200">200 / page</option>
+                    </select>
+                </div>
+
+                <!-- Sort Order -->
+                <div class="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                    <label for="sortSelect">Sort:</label>
+                    <select id="sortSelect" onchange="changeSort()" class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="name_asc">Hospital Name (A-Z)</option>
+                        <option value="name_desc">Hospital Name (Z-A)</option>
+                        <option value="city_asc">City Name (A-Z)</option>
+                        <option value="state_asc">State Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hospital Cards Grid -->
+        <div id="hospitalContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Dynamic Cards will be rendered here -->
+        </div>
+
+        <!-- Pagination Controls -->
+        <div id="paginationWrapper" class="mt-8 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm no-print">
+            <div id="paginationInfo" class="text-xs font-medium text-slate-600">
+                Page 1 of 1 (12,800 total)
+            </div>
+            <div class="flex items-center gap-1" id="paginationButtons">
+                <!-- Dynamic Pagination Buttons -->
+            </div>
+        </div>
+
+        <!-- No Results State -->
+        <div id="noResults" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm mt-4">
+            <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i class="fa-solid fa-hospital-slash text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1 font-heading">Koi hospital nahi mila is search ya filter ke anusar</h3>
+            <p class="text-slate-500 text-sm max-w-md mx-auto mb-5">
+                Kripya spelling check karein ya dusra city / state / specialty chun kar dobara try karein.
+            </p>
+            <button onclick="resetAllFilters()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition shadow-sm inline-flex items-center gap-2">
+                <i class="fa-solid fa-rotate-left"></i> Reset All Filters
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto no-print">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="text-left">
+                <p class="font-semibold text-slate-700">Aditya Birla Health Insurance Co. Limited - Hospital Network Directory</p>
+                <p class="text-slate-400 mt-0.5">Disclaimer: Network hospital lists are subject to change as per the insurer's discretion. Please verify cashless authorization prior to admission.</p>
+            </div>
+            <div class="text-right flex items-center gap-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 font-medium border border-slate-200">
+                    <i class="fa-solid fa-database text-blue-500"></i> 12,800+ Hospitals Loaded
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification for Copied Address -->
+    <div id="copyToast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2.5 transition-all duration-300 transform translate-y-16 opacity-0 pointer-events-none z-50">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span>Address copied to clipboard!</span>
+    </div>
+
+    <!-- Load Local Hospitals Database (JS file allows local file:// execution without CORS) -->
+    <script src="hospitals_data.js"></script>
+
+    <!-- Application Script -->
+    <script>
+        // State management
+        let allHospitals = [];
+        let filteredHospitals = [];
+        let currentPage = 1;
+        let pageSize = 24;
+        let currentSort = 'name_asc';
+        let debounceTimer = null;
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if loaded from hospitals_data.js
+            if (typeof hospitalsData !== 'undefined' && Array.isArray(hospitalsData)) {
+                allHospitals = hospitalsData;
+                initApp();
+            } else {
+                // Fallback: Fetch hospitals_data.json if hosted on web server
+                try {
+                    const res = await fetch('hospitals_data.json');
+                    allHospitals = await res.json();
+                    initApp();
+                } catch (err) {
+                    console.error("Failed to load hospitals JSON:", err);
+                    document.getElementById('hospitalContainer').innerHTML = `
+                        <div class="col-span-full bg-rose-50 border border-rose-200 text-rose-700 p-6 rounded-xl text-center">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl mb-2 text-rose-500"></i>
+                            <h3 class="font-bold text-base mb-1">Failed to load hospitals data</h3>
+                            <p class="text-xs text-rose-600">Please make sure hospitals_data.js or hospitals_data.json is in the same directory.</p>
+                        </div>
+                    `;
+                }
+            }
+        });
+
+        function initApp() {
+            document.getElementById('headerTotalCount').innerHTML = `
+                <i class="fa-solid fa-hospital mr-1 text-blue-400"></i> ${allHospitals.length.toLocaleString()} Hospitals
+            `;
+
+            populateStateFilter();
+            populateCityFilter();
+            applyFilters();
+        }
+
+        // Populate State Dropdown
+        function populateStateFilter() {
+            const stateFilter = document.getElementById('stateFilter');
+            const states = [...new Set(allHospitals.map(h => h.state).filter(Boolean))].sort();
+            
+            states.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                stateFilter.appendChild(opt);
+            });
+        }
+
+        // Populate City Datalist
+        function populateCityFilter(selectedState = '') {
+            const datalist = document.getElementById('citiesDatalist');
+            datalist.innerHTML = '';
+
+            let citySource = allHospitals;
+            if (selectedState) {
+                citySource = allHospitals.filter(h => h.state.toLowerCase() === selectedState.toLowerCase());
+            }
+
+            const cities = [...new Set(citySource.map(h => h.city).filter(Boolean))].sort();
+            cities.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                datalist.appendChild(opt);
+            });
+        }
+
+        function onStateChange() {
+            const state = document.getElementById('stateFilter').value;
+            populateCityFilter(state);
+            debounceFilter();
+        }
+
+        function setCityFilter(cityName) {
+            document.getElementById('cityFilter').value = cityName;
+            debounceFilter();
+        }
+
+        function clearInput(id) {
+            document.getElementById(id).value = '';
+            debounceFilter();
+        }
+
+        function debounceFilter() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                currentPage = 1;
+                applyFilters();
+            }, 120);
+        }
+
+        function changePageSize() {
+            pageSize = parseInt(document.getElementById('pageSizeSelect').value, 10);
+            currentPage = 1;
+            renderCurrentPage();
+            renderPagination();
+        }
+
+        function changeSort() {
+            currentSort = document.getElementById('sortSelect').value;
+            sortFilteredData();
+            currentPage = 1;
+            renderCurrentPage();
+            renderPagination();
+        }
+
+        function sortFilteredData() {
+            if (currentSort === 'name_asc') {
+                filteredHospitals.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (currentSort === 'name_desc') {
+                filteredHospitals.sort((a, b) => b.name.localeCompare(a.name));
+            } else if (currentSort === 'city_asc') {
+                filteredHospitals.sort((a, b) => a.city.localeCompare(b.city) || a.name.localeCompare(b.name));
+            } else if (currentSort === 'state_asc') {
+                filteredHospitals.sort((a, b) => a.state.localeCompare(b.state) || a.city.localeCompare(b.city));
+            }
+        }
+
+        function applyFilters() {
+            const universalQuery = document.getElementById('universalSearch').value.toLowerCase().trim();
+            const pincodeQuery = document.getElementById('pincodeSearch').value.trim();
+            const stateQuery = document.getElementById('stateFilter').value.toLowerCase();
+            const cityQuery = document.getElementById('cityFilter').value.toLowerCase().trim();
+            const problemQuery = document.getElementById('problemFilter').value.toLowerCase();
+
+            // Toggle clear button icons
+            document.getElementById('clearSearchBtn').classList.toggle('hidden', universalQuery === '');
+            document.getElementById('clearPinBtn').classList.toggle('hidden', pincodeQuery === '');
+
+            filteredHospitals = allHospitals.filter(h => {
+                // Universal search in name, address, city, state
+                const matchesUniversal = universalQuery === '' ||
+                    h.name.toLowerCase().includes(universalQuery) ||
+                    h.address.toLowerCase().includes(universalQuery) ||
+                    h.city.toLowerCase().includes(universalQuery) ||
+                    h.state.toLowerCase().includes(universalQuery) ||
+                    (h.pincode && h.pincode.includes(universalQuery));
+
+                // Pincode filter
+                const matchesPincode = pincodeQuery === '' || 
+                    (h.pincode && h.pincode.startsWith(pincodeQuery)) ||
+                    h.address.includes(pincodeQuery);
+
+                // State filter
+                const matchesState = stateQuery === '' || h.state.toLowerCase() === stateQuery;
+
+                // City filter
+                const matchesCity = cityQuery === '' || h.city.toLowerCase().includes(cityQuery);
+
+                // Specialty filter
+                const matchesSpecialty = problemQuery === '' || h.specialty.toLowerCase().includes(problemQuery);
+
+                return matchesUniversal && matchesPincode && matchesState && matchesCity && matchesSpecialty;
+            });
+
+            sortFilteredData();
+            updateStatsUI(universalQuery, pincodeQuery, stateQuery, cityQuery, problemQuery);
+            renderCurrentPage();
+            renderPagination();
+        }
+
+        function updateStatsUI(universalQuery, pincodeQuery, stateQuery, cityQuery, problemQuery) {
+            const count = filteredHospitals.length;
+            const resultCount = document.getElementById('resultCount');
+            const filterSummary = document.getElementById('filterSummary');
+            const noResults = document.getElementById('noResults');
+            const container = document.getElementById('hospitalContainer');
+            const paginationWrapper = document.getElementById('paginationWrapper');
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+                container.classList.add('hidden');
+                paginationWrapper.classList.add('hidden');
+                resultCount.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-circle-xmark mr-1"></i> 0 Hospitals found</span>`;
+                filterSummary.textContent = 'Try adjusting your search query or selecting a different location.';
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            container.classList.remove('hidden');
+            paginationWrapper.classList.remove('hidden');
+
+            resultCount.innerHTML = `
+                <span>Found <span class="text-blue-600 font-extrabold">${count.toLocaleString()}</span> Hospital${count > 1 ? 's' : ''}</span>
+            `;
+
+            let activeFilters = [];
+            if (universalQuery) activeFilters.push(`Keyword: "${universalQuery}"`);
+            if (pincodeQuery) activeFilters.push(`PIN: ${pincodeQuery}`);
+            if (stateQuery) activeFilters.push(`State: ${document.getElementById('stateFilter').value}`);
+            if (cityQuery) activeFilters.push(`City: ${document.getElementById('cityFilter').value}`);
+            if (problemQuery) activeFilters.push(`Specialty: ${document.getElementById('problemFilter').selectedOptions[0].text}`);
+
+            if (activeFilters.length > 0) {
+                filterSummary.textContent = `Active Filters: ${activeFilters.join(' • ')}`;
+            } else {
+                filterSummary.textContent = `Showing all network hospitals across 30 states & 1,512+ cities.`;
+            }
+        }
+
+        function getSpecialtyBadge(specialty) {
+            const sLower = specialty.toLowerCase();
+            let color = 'bg-blue-50 text-blue-700 border-blue-200';
+            let icon = 'fa-tag';
+
+            if (sLower.includes('eye')) {
+                color = 'bg-cyan-50 text-cyan-800 border-cyan-200';
+                icon = 'fa-eye';
+            } else if (sLower.includes('heart') || sLower.includes('cardio')) {
+                color = 'bg-rose-50 text-rose-800 border-rose-200';
+                icon = 'fa-heart-pulse';
+            } else if (sLower.includes('cancer') || sLower.includes('oncol')) {
+                color = 'bg-purple-50 text-purple-800 border-purple-200';
+                icon = 'fa-ribbon';
+            } else if (sLower.includes('ortho') || sLower.includes('bone')) {
+                color = 'bg-amber-50 text-amber-800 border-amber-200';
+                icon = 'fa-bone';
+            } else if (sLower.includes('child') || sLower.includes('pediatric') || sLower.includes('maternity')) {
+                color = 'bg-pink-50 text-pink-800 border-pink-200';
+                icon = 'fa-baby';
+            } else if (sLower.includes('kidney') || sLower.includes('uro')) {
+                color = 'bg-indigo-50 text-indigo-800 border-indigo-200';
+                icon = 'fa-droplet';
+            } else if (sLower.includes('multi')) {
+                color = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+                icon = 'fa-hospital';
+            } else if (sLower.includes('dental')) {
+                color = 'bg-teal-50 text-teal-800 border-teal-200';
+                icon = 'fa-tooth';
+            } else if (sLower.includes('ent')) {
+                color = 'bg-orange-50 text-orange-800 border-orange-200';
+                icon = 'fa-head-side-cough';
+            }
+
+            return `
+                <span class="inline-flex items-center gap-1.5 ${color} text-xs font-semibold px-2.5 py-1 rounded-lg border tag-pill">
+                    <i class="fa-solid ${icon}"></i> ${specialty}
+                </span>
+            `;
+        }
+
+        function renderCurrentPage() {
+            const container = document.getElementById('hospitalContainer');
+            container.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, filteredHospitals.length);
+            const pageData = filteredHospitals.slice(startIndex, endIndex);
+
+            pageData.forEach((h, idx) => {
+                const card = document.createElement('div');
+                card.className = 'hospital-card bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col justify-between group';
+
+                // Safe URL for Google Maps
+                const fullSearchQuery = encodeURIComponent(`${h.name}, ${h.address}`);
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${fullSearchQuery}`;
+
+                // Clean display address
+                const displayAddress = h.address || `${h.city}, ${h.state} - ${h.pincode}`;
+                const escapedAddress = displayAddress.replace(/"/g, '&quot;').replace(/'/g, "\\'");
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Header with Status Badge -->
+                        <div class="flex items-start justify-between gap-2 mb-2.5">
+                            <h3 class="font-bold text-slate-900 text-base leading-snug group-hover:text-blue-600 transition-colors">
+                                ${h.name}
+                            </h3>
+                            <span class="shrink-0 inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200" title="Cashless Network Empaneled">
+                                <i class="fa-solid fa-check"></i> Cashless
+                            </span>
+                        </div>
+
+                        <!-- Location Badges -->
+                        <div class="flex flex-wrap items-center gap-1.5 mb-3 text-xs text-slate-600">
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 font-semibold text-slate-700 border border-slate-200">
+                                <i class="fa-solid fa-location-dot text-blue-500"></i> ${h.city}
+                            </span>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 font-medium text-slate-600 border border-slate-200">
+                                ${h.state}
+                            </span>
+                            ${h.pincode ? `
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 font-semibold text-blue-700 border border-blue-200/60">
+                                PIN: ${h.pincode}
+                            </span>
+                            ` : ''}
+                        </div>
+
+                        <!-- Full Address Box -->
+                        <p class="text-slate-600 text-xs leading-relaxed mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100 font-normal">
+                            ${displayAddress}
+                        </p>
+                    </div>
+
+                    <!-- Footer Actions: Specialty & Map Links -->
+                    <div class="pt-3 border-t border-slate-100 flex flex-col gap-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            ${getSpecialtyBadge(h.specialty)}
+                        </div>
+
+                        <div class="flex items-center justify-between gap-2 pt-1">
+                            <button onclick="copyToClipboard('${escapedAddress}')" class="text-xs text-slate-500 hover:text-slate-800 font-medium flex items-center gap-1.5 transition py-1 px-2 rounded-lg hover:bg-slate-100">
+                                <i class="fa-regular fa-copy"></i> Copy Address
+                            </button>
+                            <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1.5 transition py-1 px-2.5 rounded-lg bg-blue-50 hover:bg-blue-100">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> View on Maps
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderPagination() {
+            const totalItems = filteredHospitals.length;
+            const totalPages = Math.ceil(totalItems / pageSize) || 1;
+            const paginationInfo = document.getElementById('paginationInfo');
+            const buttonsContainer = document.getElementById('paginationButtons');
+
+            const startItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+            const endItem = Math.min(currentPage * pageSize, totalItems);
+
+            paginationInfo.innerHTML = `
+                Showing <strong class="text-slate-800">${startItem.toLocaleString()} - ${endItem.toLocaleString()}</strong> of <strong class="text-slate-800">${totalItems.toLocaleString()}</strong> hospitals (Page ${currentPage} of ${totalPages})
+            `;
+
+            buttonsContainer.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            // First & Prev Button
+            const prevDisabled = currentPage === 1;
+            buttonsContainer.innerHTML += `
+                <button onclick="goToPage(1)" ${prevDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg text-xs font-semibold ${prevDisabled ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}" title="First Page">
+                    <i class="fa-solid fa-angles-left"></i>
+                </button>
+                <button onclick="goToPage(${currentPage - 1})" ${prevDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg text-xs font-semibold ${prevDisabled ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}" title="Previous Page">
+                    <i class="fa-solid fa-angle-left"></i> Prev
+                </button>
+            `;
+
+            // Smart page number buttons
+            let startP = Math.max(1, currentPage - 2);
+            let endP = Math.min(totalPages, currentPage + 2);
+
+            if (startP > 1) {
+                buttonsContainer.innerHTML += `<button onclick="goToPage(1)" class="w-8 h-8 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100">1</button>`;
+                if (startP > 2) {
+                    buttonsContainer.innerHTML += `<span class="px-1 text-slate-400">...</span>`;
+                }
+            }
+
+            for (let i = startP; i <= endP; i++) {
+                const isActive = i === currentPage;
+                buttonsContainer.innerHTML += `
+                    <button onclick="goToPage(${i})" class="w-8 h-8 rounded-lg text-xs font-bold transition ${isActive ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100'}">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            if (endP < totalPages) {
+                if (endP < totalPages - 1) {
+                    buttonsContainer.innerHTML += `<span class="px-1 text-slate-400">...</span>`;
+                }
+                buttonsContainer.innerHTML += `<button onclick="goToPage(${totalPages})" class="w-8 h-8 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100">${totalPages}</button>`;
+            }
+
+            // Next & Last Button
+            const nextDisabled = currentPage === totalPages;
+            buttonsContainer.innerHTML += `
+                <button onclick="goToPage(${currentPage + 1})" ${nextDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg text-xs font-semibold ${nextDisabled ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}" title="Next Page">
+                    Next <i class="fa-solid fa-angle-right"></i>
+                </button>
+                <button onclick="goToPage(${totalPages})" ${nextDisabled ? 'disabled' : ''} class="px-2.5 py-1.5 rounded-lg text-xs font-semibold ${nextDisabled ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}" title="Last Page">
+                    <i class="fa-solid fa-angles-right"></i>
+                </button>
+            `;
+        }
+
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredHospitals.length / pageSize) || 1;
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderCurrentPage();
+            renderPagination();
+            window.scrollTo({ top: 380, behavior: 'smooth' });
+        }
+
+        function resetAllFilters() {
+            document.getElementById('universalSearch').value = '';
+            document.getElementById('pincodeSearch').value = '';
+            document.getElementById('stateFilter').value = '';
+            document.getElementById('cityFilter').value = '';
+            document.getElementById('problemFilter').value = '';
+            populateCityFilter();
+            currentPage = 1;
+            applyFilters();
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Address copied to clipboard!");
+            }).catch(err => {
+                console.error("Copy failed", err);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('copyToast');
+            toast.querySelector('span').textContent = message;
+            toast.classList.remove('translate-y-16', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-16', 'opacity-0');
+            }, 2500);
+        }
+
+        // Export Filtered Data to JSON
+        function exportToJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(filteredHospitals, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `aditya_birla_hospitals_${filteredHospitals.length}_records.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast(`Exported ${filteredHospitals.length} records as JSON!`);
+        }
+
+        // Export Filtered Data to CSV
+        function exportToCSV() {
+            if (filteredHospitals.length === 0) return;
+
+            const headers = ["Hospital Name", "City", "State", "PIN Code", "Specialty", "Address"];
+            const rows = filteredHospitals.map(h => [
+                `"${(h.name || '').replace(/"/g, '""')}"`,
+                `"${(h.city || '').replace(/"/g, '""')}"`,
+                `"${(h.state || '').replace(/"/g, '""')}"`,
+                `"${(h.pincode || '').replace(/"/g, '""')}"`,
+                `"${(h.specialty || '').replace(/"/g, '""')}"`,
+                `"${(h.address || '').replace(/"/g, '""')}"`
+            ]);
+
+            const csvContent = "\uFEFF" + [headers.join(","), ...rows.map(e => e.join(","))].join("\r\n");
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `aditya_birla_hospitals_${filteredHospitals.length}_records.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast(`Exported ${filteredHospitals.length} records as CSV!`);
+        }
+    </script>
+</body>
+</html>
